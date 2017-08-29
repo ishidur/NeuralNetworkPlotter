@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt, numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.gridspec as gridspec
 
+# pretrained
 # 2X3X3X3X1
 # # before
 # before="""0.506323,0.125622,0.167479
@@ -29,39 +30,39 @@ import matplotlib.gridspec as gridspec
 
 # 2X4X2X3X1
 # before
-before="""0.0732405,0.389799,0.230927
+before = """0.0732405,0.389799,0.230927
 0.66629,0.826228,0.0708355
 0.287844,0.255446,0.93761
 0.917524,0.725368,0.795373"""
 # after
-after="""0.232488,0.41725,0.708399
+after = """0.232488,0.41725,0.708399
 0.98919,0.994483,0.0739695
 0.974552,0.0951076,0.99909
 0.999925,0.960556,0.978106"""
 
-a=before.split("\n")
-b=[]
+a = before.split("\n")
+b = []
 for a_i in a:
     b.append([float(k) for k in a_i.split(',')])
 
-c=after.split("\n")
-d=[]
+c = after.split("\n")
+d = []
 for c_i in c:
     d.append([float(k) for k in c_i.split(',')])
-v= np.array(b)
-w= np.array(d)
+v = np.array(b)
+w = np.array(d)
 print(b)
 print(d)
-t1= np.array([1, 0, 0, 1])
-t2= np.array([1, 0, 0, 1])
+t1 = np.array([1, 0, 0, 1])
+t2 = np.array([1, 0, 0, 1])
 fig = plt.figure()
-gs = gridspec.GridSpec(2,2)
+gs = gridspec.GridSpec(2, 2)
 
-ax1 = fig.add_subplot(gs[:,0], projection='3d')
-ax2 = fig.add_subplot(gs[:,1], projection='3d')
+ax1 = fig.add_subplot(gs[:, 0], projection='3d')
+ax2 = fig.add_subplot(gs[:, 1], projection='3d')
 ax1.set_title('before')
 ax2.set_title('after')
-ax1.scatter(v[:,0],v[:,1],v[:,2], c=t1,s=500, marker='o')
-ax2.scatter(w[:,0],w[:,1],w[:,2], c=t2, s=500, marker='*')
+ax1.scatter(v[:, 0], v[:, 1], v[:, 2], c=t1, s=500, marker='o')
+ax2.scatter(w[:, 0], w[:, 1], w[:, 2], c=t2, s=500, marker='*')
 
 plt.show()
