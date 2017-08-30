@@ -1,7 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt, numpy as np
+from matplotlib import pyplot as plt, gridspec as gridspec
 from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.gridspec as gridspec
 
 # pretrained
 # 2X3X3X3X1

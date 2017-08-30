@@ -1,11 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt, numpy as np
+from matplotlib import cm, gridspec, pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.gridspec as gridspec
-import matplotlib.pyplot as plt
-from matplotlib import cm
-
-from pylab import *
 
 
 def sigmoid(x):
@@ -54,20 +49,20 @@ str = "99	-0.00883684	-0.00564811	-0.00175109	0.00613877	-0.00836542	0.00206478	
 
 neurons = [int(k) for k in neuronStr.split('X')]
 # via Excel
-# b = [float(k) for k in str.split('\t')]
+b = [float(k) for k in str.split('\t')]
 # via Sublime
-b = [float(k) for k in str.split(',')]
+# b = [float(k) for k in str.split(',')]
 
 weights = []
 biases = []
-iter = 1
+cursor = 1
 for i in range(len(neurons) - 1):
     m = []
     for j in range(neurons[i]):
-        m.append(b[iter:iter + neurons[i + 1]])
-        iter += neurons[i + 1]
-    biases.append(np.matrix(b[iter:iter + neurons[i + 1]]).transpose())
-    iter += neurons[i + 1]
+        m.append(b[cursor:cursor + neurons[i + 1]])
+        cursor += neurons[i + 1]
+    biases.append(np.matrix(b[cursor:cursor + neurons[i + 1]]).transpose())
+    cursor += neurons[i + 1]
     weights.append(np.matrix(m).transpose())
 
 
@@ -88,19 +83,13 @@ def meshgrid_propagation_forMap(layersArray):
     y = np.linspace(0, xyRange, N)
     X, Y = np.meshgrid(x, y)  # グリッド領域を示すマトリックスの構成
     Z = np.array(list(map(lambda x, y: list(map(calcOutput, x, y)), X, Y)))
-    pcolor(X, Y, Z, vmin=0., vmax=1.)
-    colorbar()
-    jet()
-
-    # fig = plt.figure()
-    # ax = Axes3D(fig)
-    # ax.plot_surface(X, Y, Z, rstride=1, cstride=1,cmap=cm.coolwarm)
-    # ax.plot_wireframe(X,Y,Z)
+    plt.pcolor(X, Y, Z, vmin=0., vmax=1.)
+    plt.colorbar()
+    plt.jet()
     ttl = "%s\nlearning time = %d" % (neuronStr, b[0])
     plt.title(ttl)
     plt.xlabel('Input1', fontsize=15)
     plt.ylabel('Input2', fontsize=15)
-    # ax.set_zlabel('O')
     plt.xlim(0, 1.0)
     plt.ylim(0, 1.0)
     plt.legend(fontsize=18)

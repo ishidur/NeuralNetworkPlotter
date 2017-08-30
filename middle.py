@@ -1,10 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt, numpy as np
-import matplotlib.pyplot as plt
-from matplotlib import cm
+from matplotlib import cm, gridspec, pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.gridspec as gridspec
-from pylab import *
 
 
 def sigmoid(x):
@@ -74,6 +70,7 @@ for i in range(len(neurons) - 1):
     iter += neurons[i + 1]
     weights.append(np.matrix(m).transpose())
 
+
 def calcOutput(t):
     inputs = weights[0] * np.matrix(t).transpose() + biases[0]
     for i in range(len(neurons) - 3):
@@ -81,6 +78,7 @@ def calcOutput(t):
         inputs = weights[i + 1] * outputs + biases[i + 1]
     outputs = sigmoid(inputs)
     return np.array(outputs.T)[0]
+
 
 testData = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 v = np.array(list(map(calcOutput, testData)))
@@ -91,5 +89,5 @@ fig = plt.figure()
 ax1 = fig.add_subplot(111, projection='3d')
 ax1.scatter(v[:, 0], v[:, 1], v[:, 2], c=t1, s=500, marker='o')
 filename = "%s_learning_time_%d" % (neuronStr, b[0])
-plt.savefig(filename + ".png")
-# plt.show()
+# plt.savefig(filename + ".png")
+plt.show()
